@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -14,126 +15,125 @@
             overflow-y: auto;
         }
 
-        .petal {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-image: url('https://i.ibb.co/bNFSjFC/vecteezy-heart-1187511.png'); /* URL da imagem da pétala */
-            background-size: contain;
-            animation: fall 1s linear;
+.petal {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-image: url('https://i.ibb.co/bNFSjFC/vecteezy-heart-1187511.png'); /* URL da imagem da pétala */
+        background-size: contain;
+        animation: fall 1s linear;
+        opacity: 0;
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    @keyframes fall {
+        0% {
+            transform: translateY(-50px) translateX(0) rotate(0deg);
             opacity: 0;
-            z-index: -1;
-            pointer-events: none;
         }
+        50% { opacity: 1; }
+        100% {
+            transform: translateY(calc(100vh + 50px)) translateX(calc(50vw * (Math.random() - 0.5))) rotate(360deg);
+            opacity: 0;
+        }
+    }
 
-        @keyframes fall {
-            0% {
-                transform: translateY(-50px) translateX(0) rotate(0deg);
-                opacity: 0;
-            }
-            50% { opacity: 1; }
-            100% {
-                transform: translateY(calc(100vh + 50px)) translateX(calc(50vw * (Math.random() - 0.5))) rotate(360deg);
-                opacity: 0;
-            }
-        }
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        position: relative;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
+    h1 {
+        text-align: center;
+        font-size: 3em;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
 
-        h1 {
-            text-align: center;
-            font-size: 3em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
+    p {
+        font-size: 1.4em;
+        line-height: 1.6;
+        text-align: center;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
 
-        p {
-            font-size: 1.4em;
-            line-height: 1.6;
-            text-align: center;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
+    .photo-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 30px;
+    }
 
-        .photo-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 30px;
-        }
+    .photo-grid img {
+        width: 220px;
+        height: 220px;
+        object-fit: cover;
+        margin: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s ease;
+    }
 
-        .photo-grid img {
-            width: 220px;
-            height: 220px;
-            object-fit: cover;
-            margin: 10px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease;
-            cursor: pointer; /* Adicionado cursor para indicar que a imagem é clicável */
-        }
+    .photo-grid img:hover {
+        transform: scale(1.1);
+    }
 
-        .photo-grid img:hover {
-            transform: scale(1.1);
-        }
+    .music-player {
+        margin-top: 30px;
+        text-align: center;
+    }
 
-        .music-player {
-            margin-top: 30px;
-            text-align: center;
-        }
+    .music-player iframe {
+        width: 100%;
+        max-width: 400px;
+        height: 80px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
 
-        .music-player iframe {
-            width: 100%;
-            max-width: 400px;
-            height: 80px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-        }
+    .reveal-button {
+        display: block;
+        margin: 30px auto;
+        background-color: transparent;
+        border: 2px solid #fff;
+        color: #fff;
+        padding: 15px 30px;
+        font-size: 1.2em;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
 
-        .reveal-button {
-            display: block;
-            margin: 30px auto;
-            background-color: transparent;
-            border: 2px solid #fff;
-            color: #fff;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
+    .reveal-button:hover {
+        background-color: #fff;
+        color: #990000; /* Cor do texto ao passar o mouse */
+    }
 
-        .reveal-button:hover {
-            background-color: #fff;
-            color: #990000; /* Cor do texto ao passar o mouse */
-        }
+    .letter-content {
+        display: none;
+        text-align: center;
+        margin-top: 20px;
+        font-size: 1.3em;
+        line-height: 1.6;
+        padding: 20px;
+        background-color: rgba(255,255,255,0.3);
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
 
-        .letter-content {
-            display: none;
-            text-align: center;
-            margin-top: 20px;
-            font-size: 1.3em;
-            line-height: 1.6;
-            padding: 20px;
-            background-color: rgba(255,255,255,0.3);
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
-        }
-
-        @media (max-width: 600px) {
-             .container { padding: 10px; }
-             .photo-grid img { width: 150px; height: 150px; margin: 5px; }
-             h1 { font-size: 2em; }
-             p, .letter-content { font-size: 1.1em; }
-        }
-    </style>
+    @media (max-width: 600px) {
+         .container { padding: 10px; }
+         .photo-grid img { width: 150px; height: 150px; margin: 5px; }
+         h1 { font-size: 2em; }
+         p, .letter-content { font-size: 1.1em; }
+    }
+</style>
 
 </head>
 <body>
@@ -143,7 +143,6 @@
     <p>Meu amor, fiz essa pequena surpresa para te mostrar o quanto te amo.</p>
 
     <div class="photo-grid">
-        <!-- Adicionado ID para fácil seleção e cursor pointer no CSS -->
         <img src="https://i.ibb.co/fDCKmtd/Imagem-do-Whats-App-de-2025-01-04-s-18-41-57-1191356c.jpg" alt="Foto 1">
         <img src="https://i.ibb.co/F7gMZNG/Imagem-do-Whats-App-de-2025-01-03-s-03-56-08-fcc618bd.jpg" alt="Foto 2">
         <img src="https://i.ibb.co/L1ghMcN/Imagem-do-Whats-App-de-2025-01-03-s-03-49-16-9bea3550.jpg" alt="Foto 3">
@@ -151,10 +150,15 @@
     </div>
 
    <div class="music-player">
-        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/3iuC8v3WfFpMqQRg1NHDZM?si=6a0193ff9e484645&utm_source=copy-link" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-   </div>
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/3iuC8v3WfFpMqQRg1NHDZM?si=6a0193ff9e484645&utm_source=copy-link" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+IGNORE_WHEN_COPYING_END
+</div>
 
-    <button class="reveal-button" onclick="showLetter()">Revelar meu segredo ♥</button>
+<button class="reveal-button" onclick="showLetter()">Revelar meu segredo ♥</button>
 
     <div id="letter" class="letter-content">
         <p>Meu amor, cada momento ao seu lado é um presente. Você me faz sentir a pessoa mais feliz do mundo. Te amo mais que tudo!</p>
@@ -162,9 +166,6 @@
         <p>Seu amado(a)</p>
     </div>
 </div>
-
-<!-- Elemento de áudio escondido para a música local -->
-<audio id="hiddenAudio" src="meu amor/meu amor.mp3" preload="auto"></audio>
 
 <script>
     function showLetter() {
@@ -176,53 +177,15 @@
         const petal = document.createElement('div');
         petal.className = 'petal';
         petal.style.left = `${Math.random() * 100}vw`;
-        // Ajuste na animação para pétalas desaparecerem mais rápido ou terem duração variada
-        petal.style.animationDuration = `${Math.random() * 1.5 + 0.8}s`; // Duração entre 0.8s e 2.3s
-        petal.style.animationDelay = `${Math.random() * 2}s`; // Começa a cair em momentos diferentes
+        petal.style.animationDelay = `${Math.random() * 5}s`;
         document.body.appendChild(petal);
-
-        // Remove pétala após a animação para não sobrecarregar o DOM
-         petal.addEventListener('animationend', () => {
-             petal.remove();
-         });
-    }, 300); // Intervalo menor para mais pétalas
-
-    // --- NOVO CÓDIGO PARA TOCAR MÚSICA LOCAL ---
-    const images = document.querySelectorAll('.photo-grid img');
-    const hiddenAudio = document.getElementById('hiddenAudio');
-    // Defina aqui a senha que você quer usar
-    const correctPassword = 'teamo'; // <<< COLOQUE SUA SENHA AQUI (exemplo: 'teamo')
-
-    images.forEach(img => {
-        img.addEventListener('click', () => {
-            const enteredPassword = prompt("Digite a senha especial para ouvir nossa música:");
-
-            if (enteredPassword !== null) { // Verifica se o usuário não clicou em Cancelar
-                // Compara a senha digitada (ignorando maiúsculas/minúsculas) com a senha correta
-                if (enteredPassword.toLowerCase() === correctPassword.toLowerCase()) {
-                    // Tenta tocar a música
-                    hiddenAudio.play()
-                        .then(() => {
-                            console.log("Reproduzindo 'meu amor.mp3'");
-                            // Opcional: pode adicionar um alert ou mensagem na página indicando que a música começou
-                            // alert("Nossa música começou! ❤️");
-                        })
-                        .catch(error => {
-                            // Informa o usuário se o navegador bloqueou a reprodução automática
-                            console.error("Erro ao reproduzir áudio:", error);
-                            alert("Não foi possível iniciar a música automaticamente. Pode ser necessário interagir com a página primeiro ou verificar permissões do navegador.");
-                        });
-                } else {
-                    alert("Senha incorreta!");
-                }
-            } else {
-                 console.log("Prompt de senha cancelado.");
-            }
-        });
-    });
-    // --- FIM DO NOVO CÓDIGO ---
-
+    }, 500);
 </script>
-
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+IGNORE_WHEN_COPYING_END
 </body>
+
 </html>
