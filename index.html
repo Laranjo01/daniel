@@ -191,7 +191,7 @@
 
     <!-- Player YouTube escondido (para música de fundo da mensagem especial) -->
     <div class="hidden-player">
-        <iframe id="hidden-audio-player" width="1" height="1" src="https://www.youtube.com/embed/42QzFfe-hUEGqcio?enablejsapi=1&loop=1&playlist=42QzFfe-hUEGqcio" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe id="hidden-audio-player" width="1" height="1" src="https://www.youtube.com/embed/XgO9WyDA6sk?enablejsapi=1&loop=1&playlist=XgO9WyDA6sk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div>
 
     <!-- Popup de senha com olho e botão alterado -->
@@ -273,8 +273,8 @@
              console.log("YouTube API Ready.");
              try {
                  ytPlayer = new YT.Player('hidden-audio-player', {
-                     height: '1', width: '1', videoId: '42QzFfe-hUEGqcio',
-                     playerVars: { 'playsinline': 1, 'loop': 1, 'playlist': '42QzFfe-hUEGqcio' },
+                     height: '1', width: '1', videoId: 'XgO9WyDA6sk',
+                     playerVars: { 'playsinline': 1, 'loop': 1, 'playlist': 'XgO9WyDA6sk' },
                      events: { 'onReady': onPlayerReady, 'onError': onPlayerError }
                  });
              } catch(e) { console.error("Erro ao inicializar YT Player:", e); }
