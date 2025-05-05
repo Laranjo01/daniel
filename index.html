@@ -11,268 +11,218 @@
             margin: 0;
             background: linear-gradient(to bottom, #990000, #660000);
             color: #fff;
-            overflow-y: auto; /* Permitir rolagem vertical */
-            min-height: 100vh; /* Garantir que o corpo ocupe pelo menos a altura da tela */
-            position: relative; /* Necessário para o posicionamento absoluto das pétalas */
+            overflow-y: auto;
         }
 
         .petal {
             position: absolute;
             width: 20px;
             height: 20px;
-            background-image: url('https://i.ibb.co/bNFSjFC/vecteezy-heart-1187511.png'); /* URL da imagem da pétala (coração) */
+            background-image: url('https://i.ibb.co/bNFSjFC/vecteezy-heart-1187511.png'); /* URL da imagem da pétala */
             background-size: contain;
-            background-repeat: no-repeat;
-            animation: fall 5s linear infinite; /* Animação contínua */
-            opacity: 0.8; /* Leve transparência */
-            z-index: 0; /* Ficar atrás do conteúdo principal */
+            animation: fall 1s linear;
+            opacity: 0;
+            z-index: -1;
             pointer-events: none;
-            top: -30px; /* Começar fora da tela */
         }
 
-        /* Keyframes ajustados para queda mais suave e contínua */
         @keyframes fall {
             0% {
-                transform: translateY(0) translateX(0) rotate(0deg);
+                transform: translateY(-50px) translateX(0) rotate(0deg);
                 opacity: 0;
             }
-            10% {
-                opacity: 0.8; /* Aparecer rapidamente */
-            }
+            50% { opacity: 1; }
             100% {
-                /* Cair até o fundo da página + um pouco mais */
-                /* Movimento horizontal aleatório e rotação */
-                transform: translateY(calc(100vh + 30px)) translateX(calc(20vw * (0.5 - Math.random()))) rotate(720deg);
-                opacity: 0; /* Desaparecer no final */
+                transform: translateY(calc(100vh + 50px)) translateX(calc(50vw * (Math.random() - 0.5))) rotate(360deg);
+                opacity: 0;
             }
         }
 
         .container {
             max-width: 800px;
-            margin: 50px auto 20px auto; /* Aumentar margem superior */
-            padding: 30px; /* Aumentar padding */
-            background-color: rgba(255, 255, 255, 0.15); /* Levemente mais opaco */
-            border-radius: 15px; /* Bordas mais arredondadas */
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4); /* Sombra mais pronunciada */
-            position: relative; /* Para garantir que fique acima das pétalas */
-            z-index: 1;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            position: relative;
         }
 
         h1 {
             text-align: center;
-            font-size: 2.8em; /* Ligeiramente menor para caber melhor */
-            margin-bottom: 15px;
-            text-shadow: 3px 3px 5px rgba(0,0,0,0.6);
-            color: #FFDDDD; /* Cor rosa claro */
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         p {
-            font-size: 1.3em; /* Ligeiramente menor */
-            line-height: 1.7;
+            font-size: 1.4em;
+            line-height: 1.6;
             text-align: center;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
-            margin-bottom: 25px; /* Mais espaço abaixo dos parágrafos */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
         .photo-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 15px; /* Espaço entre as fotos */
             margin-top: 30px;
-            margin-bottom: 30px; /* Espaço abaixo da grade */
         }
 
         .photo-grid img {
-            width: clamp(150px, 30vw, 220px); /* Tamanho responsivo */
-            height: auto; /* Altura automática para manter proporção */
-            aspect-ratio: 1 / 1; /* Forçar proporção quadrada */
+            width: 220px;
+            height: 220px;
             object-fit: cover;
-            border-radius: 10px; /* Bordas mais suaves */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease; /* Transição mais elaborada */
-            border: 2px solid rgba(255, 255, 255, 0.5); /* Borda sutil */
+            margin: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+            cursor: pointer; /* Adicionado cursor para indicar que a imagem é clicável */
         }
 
         .photo-grid img:hover {
-            transform: scale(1.15) rotate(3deg); /* Efeito de hover mais interessante */
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+            transform: scale(1.1);
         }
 
         .music-player {
-            margin-top: 40px; /* Mais espaço acima do player */
+            margin-top: 30px;
             text-align: center;
-            margin-bottom: 40px; /* Mais espaço abaixo do player */
         }
 
-        /* Estilizando o player de áudio padrão */
-        .music-player audio {
-            width: 80%; /* Ocupar mais espaço */
-            max-width: 500px; /* Limite máximo */
-            border-radius: 25px; /* Bordas arredondadas */
-            box-shadow: 0 3px 10px rgba(0,0,0,0.4);
-            /* Para customizar mais a aparência, seria necessário JS ou bibliotecas específicas,
-               mas a estilização direta do <audio> é limitada. */
-            filter: contrast(1.1) saturate(1.1); /* Leve ajuste de cor */
+        .music-player iframe {
+            width: 100%;
+            max-width: 400px;
+            height: 80px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
 
         .reveal-button {
             display: block;
-            margin: 40px auto; /* Mais espaço vertical */
-            background-color: #C00000; /* Vermelho mais vibrante */
-            border: none; /* Remover borda padrão */
+            margin: 30px auto;
+            background-color: transparent;
+            border: 2px solid #fff;
             color: #fff;
-            padding: 18px 35px; /* Botão maior */
-            font-size: 1.3em;
-            font-weight: bold;
+            padding: 15px 30px;
+            font-size: 1.2em;
             cursor: pointer;
-            border-radius: 30px; /* Botão mais arredondado */
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .reveal-button:hover {
-            background-color: #A00000; /* Vermelho mais escuro no hover */
-            transform: translateY(-3px); /* Efeito de levantar */
-            box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+            background-color: #fff;
+            color: #990000; /* Cor do texto ao passar o mouse */
         }
-
-        .reveal-button:active {
-             transform: translateY(1px); /* Efeito de pressionar */
-             box-shadow: 0 2px 5px rgba(0,0,0,0.4);
-        }
-
 
         .letter-content {
-            display: none; /* Começa escondido */
+            display: none;
             text-align: center;
-            margin-top: 30px;
-            font-size: 1.25em; /* Ligeiramente menor */
-            line-height: 1.8; /* Mais espaçamento entre linhas */
-            padding: 25px; /* Mais padding interno */
-            background-color: rgba(255, 255, 255, 0.2); /* Fundo sutil */
-            border-radius: 10px;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.2); /* Sombra interna */
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .letter-content p {
-            margin-bottom: 15px; /* Espaço entre parágrafos na carta */
-            font-size: 1.1em; /* Tamanho específico para a carta */
+            margin-top: 20px;
+            font-size: 1.3em;
+            line-height: 1.6;
+            padding: 20px;
+            background-color: rgba(255,255,255,0.3);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
         }
 
         @media (max-width: 600px) {
-             .container {
-                 padding: 15px;
-                 margin: 30px auto 15px auto;
-             }
-             .photo-grid img {
-                 width: clamp(100px, 40vw, 150px); /* Ajuste para telas menores */
-             }
-             h1 { font-size: 2.2em; }
+             .container { padding: 10px; }
+             .photo-grid img { width: 150px; height: 150px; margin: 5px; }
+             h1 { font-size: 2em; }
              p, .letter-content { font-size: 1.1em; }
-             .reveal-button { padding: 15px 30px; font-size: 1.1em;}
-             .music-player audio { width: 95%; }
         }
     </style>
+
 </head>
 <body>
-    <!-- Elementos para as pétalas -->
-    <script>
-        // Função para criar pétalas (corações) caindo
-        function createPetals() {
-            const numPetals = 30; // Número de pétalas na tela ao mesmo tempo
-            const body = document.body;
 
-            // Limpa pétalas antigas se houver
-            const existingPetals = body.querySelectorAll('.petal');
-            existingPetals.forEach(petal => petal.remove());
+<div class="container">
+    <h1>Para Você, Meu Amor</h1>
+    <p>Meu amor, fiz essa pequena surpresa para te mostrar o quanto te amo.</p>
 
-            for (let i = 0; i < numPetals; i++) {
-                const petal = document.createElement('div');
-                petal.className = 'petal';
-                // Define posição inicial e delay aleatórios
-                petal.style.left = `${Math.random() * 100}vw`;
-                petal.style.animationDuration = `${Math.random() * 3 + 4}s`; // Duração entre 4s e 7s
-                petal.style.animationDelay = `${Math.random() * 5}s`; // Delay inicial aleatório
-                body.appendChild(petal);
-
-                // Remover a pétala do DOM após a animação para não acumular elementos
-                petal.addEventListener('animationend', () => {
-                    petal.remove();
-                    // Cria uma nova pétala para manter o fluxo
-                    createSinglePetal();
-                });
-            }
-        }
-
-        function createSinglePetal() {
-             const petal = document.createElement('div');
-             petal.className = 'petal';
-             petal.style.left = `${Math.random() * 100}vw`;
-             petal.style.animationDuration = `${Math.random() * 3 + 4}s`;
-             petal.style.animationDelay = `0s`; // Começa imediatamente
-             document.body.appendChild(petal);
-             petal.addEventListener('animationend', () => {
-                 petal.remove();
-                 createSinglePetal(); // Cria a próxima
-             });
-        }
-
-        // Inicia a criação das pétalas quando a página carregar
-        window.addEventListener('load', createPetals);
-
-    </script>
-
-    <div class="container">
-        <h1>Para Você, Meu Amor</h1>
-        <p>Meu amor, fiz essa pequena surpresa para te mostrar o quanto você ilumina meus dias e o quanto eu te amo.</p>
-
-        <div class="photo-grid">
-            <!-- Mantenha suas URLs de imagem aqui -->
-            <img src="https://i.ibb.co/fDCKmtd/Imagem-do-Whats-App-de-2025-01-04-s-18-41-57-1191356c.jpg" alt="Nós Dois 1">
-            <img src="https://i.ibb.co/F7gMZNG/Imagem-do-Whats-App-de-2025-01-03-s-03-56-08-fcc618bd.jpg" alt="Nós Dois 2">
-            <img src="https://i.ibb.co/L1ghMcN/Imagem-do-Whats-App-de-2025-01-03-s-03-49-16-9bea3550.jpg" alt="Nós Dois 3">
-            <!-- Adicione mais fotos se desejar -->
-        </div>
-
-       <div class="music-player">
-           <!-- Elemento de áudio HTML5 para tocar seu MP3 -->
-           <audio controls>
-               <source src="meu amor/meu amor.mp3" type="audio/mpeg">
-               Seu navegador não suporta o elemento de áudio. Por favor, atualize-o ou use outro navegador.
-               <!-- Certifique-se que a pasta 'meu amor' e o arquivo 'meu amor.mp3'
-                    estão localizados corretamente em relação a este arquivo index.html no seu servidor -->
-           </audio>
-       </div>
-
-
-        <button class="reveal-button" onclick="showLetter()">Revelar meu segredo ♥</button>
-
-        <div id="letter" class="letter-content">
-            <p><strong>Meu amor,</strong></p>
-            <p>Cada segundo ao seu lado é um presente precioso. Você trouxe cores para o meu mundo e me mostrou a verdadeira felicidade. Não há palavras suficientes para expressar o quanto você significa para mim.</p>
-            <p>Espero que esta pequena lembrança te faça sorrir tanto quanto você me faz sorrir todos os dias.</p>
-            <p>Te amo infinitamente!</p>
-            <p>Com todo meu amor,</p>
-            <p><strong>Seu eterno amor</strong></p>
-        </div>
+    <div class="photo-grid">
+        <!-- Adicionado ID para fácil seleção e cursor pointer no CSS -->
+        <img src="https://i.ibb.co/fDCKmtd/Imagem-do-Whats-App-de-2025-01-04-s-18-41-57-1191356c.jpg" alt="Foto 1">
+        <img src="https://i.ibb.co/F7gMZNG/Imagem-do-Whats-App-de-2025-01-03-s-03-56-08-fcc618bd.jpg" alt="Foto 2">
+        <img src="https://i.ibb.co/L1ghMcN/Imagem-do-Whats-App-de-2025-01-03-s-03-49-16-9bea3550.jpg" alt="Foto 3">
+        <!-- Adicione mais fotos aqui -->
     </div>
 
-    <script>
-        function showLetter() {
-            const letter = document.getElementById('letter');
-            // Alterna a visibilidade da carta
-            if (letter.style.display === 'block') {
-                letter.style.display = 'none';
+   <div class="music-player">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/3iuC8v3WfFpMqQRg1NHDZM?si=6a0193ff9e484645&utm_source=copy-link" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+   </div>
+
+    <button class="reveal-button" onclick="showLetter()">Revelar meu segredo ♥</button>
+
+    <div id="letter" class="letter-content">
+        <p>Meu amor, cada momento ao seu lado é um presente. Você me faz sentir a pessoa mais feliz do mundo. Te amo mais que tudo!</p>
+        <p>Com amor,</p>
+        <p>Seu amado(a)</p>
+    </div>
+</div>
+
+<!-- Elemento de áudio escondido para a música local -->
+<audio id="hiddenAudio" src="meu amor/meu amor.mp3" preload="auto"></audio>
+
+<script>
+    function showLetter() {
+        const letter = document.getElementById('letter');
+        letter.style.display = (letter.style.display === 'block') ? 'none' : 'block';
+    }
+
+    setInterval(() => {
+        const petal = document.createElement('div');
+        petal.className = 'petal';
+        petal.style.left = `${Math.random() * 100}vw`;
+        // Ajuste na animação para pétalas desaparecerem mais rápido ou terem duração variada
+        petal.style.animationDuration = `${Math.random() * 1.5 + 0.8}s`; // Duração entre 0.8s e 2.3s
+        petal.style.animationDelay = `${Math.random() * 2}s`; // Começa a cair em momentos diferentes
+        document.body.appendChild(petal);
+
+        // Remove pétala após a animação para não sobrecarregar o DOM
+         petal.addEventListener('animationend', () => {
+             petal.remove();
+         });
+    }, 300); // Intervalo menor para mais pétalas
+
+    // --- NOVO CÓDIGO PARA TOCAR MÚSICA LOCAL ---
+    const images = document.querySelectorAll('.photo-grid img');
+    const hiddenAudio = document.getElementById('hiddenAudio');
+    // Defina aqui a senha que você quer usar
+    const correctPassword = 'teamo'; // <<< COLOQUE SUA SENHA AQUI (exemplo: 'teamo')
+
+    images.forEach(img => {
+        img.addEventListener('click', () => {
+            const enteredPassword = prompt("Digite a senha especial para ouvir nossa música:");
+
+            if (enteredPassword !== null) { // Verifica se o usuário não clicou em Cancelar
+                // Compara a senha digitada (ignorando maiúsculas/minúsculas) com a senha correta
+                if (enteredPassword.toLowerCase() === correctPassword.toLowerCase()) {
+                    // Tenta tocar a música
+                    hiddenAudio.play()
+                        .then(() => {
+                            console.log("Reproduzindo 'meu amor.mp3'");
+                            // Opcional: pode adicionar um alert ou mensagem na página indicando que a música começou
+                            // alert("Nossa música começou! ❤️");
+                        })
+                        .catch(error => {
+                            // Informa o usuário se o navegador bloqueou a reprodução automática
+                            console.error("Erro ao reproduzir áudio:", error);
+                            alert("Não foi possível iniciar a música automaticamente. Pode ser necessário interagir com a página primeiro ou verificar permissões do navegador.");
+                        });
+                } else {
+                    alert("Senha incorreta!");
+                }
             } else {
-                letter.style.display = 'block';
-                // Opcional: rolar a página para a carta ficar visível
-                letter.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                 console.log("Prompt de senha cancelado.");
             }
-        }
-    </script>
+        });
+    });
+    // --- FIM DO NOVO CÓDIGO ---
+
+</script>
 
 </body>
 </html>
