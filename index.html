@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Você, Meu Amor</title>
+    <!-- O título muda dependendo do estado -->
+    <title>...</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Fontes Originais (Dancing Script, Great Vibes) -->
+    <!-- Fontes Originais (Dancing Script, Great Vibes) - Mantidas caso a página seja ativada -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
+
     <style>
-        /* === CSS BASE ORIGINAL com MÍNIMAS ALTERAÇÕES FUNCIONAIS === */
-        body {
-            font-family: 'Arial', sans-serif; /* Fonte padrão original */
+        /* === CSS BASE ORIGINAL (Será oculto quando desativado) === */
+        body.active {
+            font-family: 'Arial', sans-serif;
             margin: 0;
             background: linear-gradient(to bottom, #990000, #660000);
             color: #fff;
@@ -41,13 +43,12 @@
             font-size: 3em;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            /* font-family: 'Great Vibes', cursive; */ /* Fonte original H1 */
+            /* font-family: 'Great Vibes', cursive; */
         }
 
-        /* Parágrafo inicial com fonte padrão original */
         .intro-paragraph {
-            font-family: 'Arial', sans-serif; /* Fonte REVERTIDA para padrão */
-            font-size: 1.4em; /* Tamanho original */
+            font-family: 'Arial', sans-serif;
+            font-size: 1.4em;
             line-height: 1.6; text-align: center;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
             margin-top: 15px; margin-bottom: 20px; padding: 0 10px;
@@ -57,40 +58,36 @@
         .photo-grid img { width: 220px; height: 220px; object-fit: cover; margin: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); transition: transform 0.3s ease; cursor: pointer; }
         .photo-grid img:hover { transform: scale(1.1); }
 
-        /* Player Spotify REATIVADO */
         .music-player {
             margin-top: 30px;
             text-align: center;
-            /* display: block; ou remover display */
         }
         .music-player iframe {
             width: 100%; max-width: 400px; height: 80px;
-            border-radius: 5px; /* Originalmente era 5px */
+            border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-            border: none; /* Adicionado para limpar borda padrão do iframe */
+            border: none;
         }
 
         .reveal-button { display: block; margin: 30px auto; background-color: transparent; border: 2px solid #fff; color: #fff; padding: 15px 30px; font-size: 1.2em; cursor: pointer; border-radius: 5px; transition: background-color 0.3s ease, color 0.3s ease; }
         .reveal-button:hover { background-color: #fff; color: #990000; }
         .letter-content { display: none; text-align: center; margin-top: 20px; font-size: 1.3em; line-height: 1.6; padding: 20px; background-color: rgba(255,255,255,0.3); border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.2); }
 
-        /* Mensagem especial - Base original */
         .special-message { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, #ff69b4, #ff1493, #990000); z-index: 1000; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; text-align: center; overflow: hidden; animation: bgGradient 30s linear infinite; }
         .credits-container { position: absolute; top: 100%; width: 95%; max-width: 800px; text-align: center; animation: scrollCredits 120s linear forwards; }
         .big-heart { font-size: 15rem; color: #ff4d4d; animation: heartbeat 1.5s infinite; margin: 50px 0; text-shadow: 0 0 20px rgba(255, 77, 77, 0.7); }
         @keyframes textAppear { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Textos românticos com fonte Dancing Script REVERTIDA */
         .romantic-text {
-            font-family: 'Dancing Script', cursive; /* Fonte REVERTIDA */
-            font-size: 2.5rem; /* Tamanho original */
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
             color: white; max-width: 80%; line-height: 1.5; margin: 40px auto;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Sombra original */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
             opacity: 0; animation: textAppear 1.5s ease-out forwards;
         }
         .couple-names {
-            font-family: 'Great Vibes', cursive; /* Fonte original */
-            font-size: 3rem; /* Tamanho original */
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
             color: white; margin: 60px 0; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
             opacity: 0; animation: textAppear 1.5s ease-out forwards;
         }
@@ -104,7 +101,6 @@
         .close-btn { position: fixed; top: 20px; right: 20px; font-size: 2rem; color: white; cursor: pointer; transition: transform 0.3s ease; z-index: 1005; display: none; text-shadow: 0 0 5px black; }
         .close-btn:hover { transform: rotate(180deg) scale(1.2); color: #ff0000; }
 
-        /* Popup de senha - Base original com adições funcionais */
         .password-popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); z-index: 1010; display: flex; justify-content: center; align-items: center; animation: fadeIn 0.5s ease; }
         .password-box { background: linear-gradient(135deg, #ffb6c1, #ff69b4); padding: 30px; border-radius: 15px; text-align: center; box-shadow: 0 0 25px rgba(255, 105, 180, 0.6); border: 2px solid white; max-width: 400px; width: 90%; animation: pulse 2s infinite; position: relative; }
         .lock-icon { font-size: 4rem; color: white; margin-bottom: 20px; text-shadow: 0 0 10px rgba(0,0,0,0.3); }
@@ -119,12 +115,10 @@
         .password-button:hover { background-color: #ff4d4d; color: white; transform: scale(1.05); }
         .error-message { color: #ffeb3b; font-size: 0.9rem; margin-top: 10px; display: none; }
 
-        /* Explosão final - Base original */
         .final-explosion { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: none; justify-content: center; align-items: center; flex-direction: column; z-index: 1002; background-color: rgba(255, 20, 147, 0.7); overflow: hidden; }
         .love-equation { font-family: 'Great Vibes', cursive; font-size: 5rem; color: white; text-shadow: 0 0 15px rgba(255, 255, 255, 0.8); margin-bottom: 30px; animation: pulse 1s infinite; z-index: 1; }
         .explosion-heart { position: absolute; font-size: 2rem; color: #ff4d4d; animation: explode 2s forwards; opacity: 0; will-change: transform, opacity; }
 
-        /* Player escondido - Base original */
         .hidden-player { position: absolute; width: 1px; height: 1px; top: -9999px; left: -9999px; overflow: hidden; opacity: 0; }
 
         /* Animações Originais Mantidas */
@@ -140,14 +134,14 @@
 
         /* Media Queries Originais */
         @media (max-width: 600px) {
+            /* Ajustes originais */
             .container { padding: 10px; }
             .photo-grid img { width: 150px; height: 150px; margin: 5px; }
             h1 { font-size: 2em; }
-            /* Ajuste intro/letter mobile */
             .intro-paragraph, .letter-content { font-size: 1.1em; }
-            .romantic-text { font-size: 1.8rem; } /* Tamanho original mobile */
+            .romantic-text { font-size: 1.8rem; }
             .big-heart { font-size: 10rem; }
-            .couple-names { font-size: 2rem; } /* Tamanho original mobile */
+            .couple-names { font-size: 2rem; }
             .password-box { padding: 20px; }
             .lock-icon { font-size: 3rem; }
             .password-title { font-size: 1.5rem; }
@@ -156,216 +150,387 @@
             #togglePassword { right: 12px; font-size: 1em;}
             .password-button { font-size: 1.1rem; padding: 10px 20px; }
             .love-equation { font-size: 3rem; }
+
+            /* Ajustes para overlay desativado */
+            #deactivated-overlay h1 { font-size: 1.8em; }
+            #deactivated-overlay .broken-heart-icon { font-size: 4em; }
+            #deactivated-overlay p { font-size: 1em; }
         }
+
+        /* === CSS PARA A PÁGINA DESATIVADA (OVERLAY) === */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden; /* Previne scroll quando desativado */
+            font-family: 'Arial', sans-serif; /* Fonte base neutra */
+        }
+
+        #deactivated-overlay {
+            position: fixed; /* Cobre toda a tela */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #333, #111); /* Fundo escuro e triste */
+            color: #aaa; /* Cor de texto desaturada */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 10000; /* Garante que fique por cima de tudo */
+            padding: 20px;
+            box-sizing: border-box;
+            opacity: 0; /* Começa invisível */
+            visibility: hidden; /* Começa inacessível */
+            transition: opacity 0.5s ease, visibility 0.5s ease; /* Transição suave */
+        }
+
+        #deactivated-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #deactivated-overlay .broken-heart-icon {
+            font-size: 6em; /* Ícone grande */
+            color: #700; /* Vermelho escuro, triste */
+            margin-bottom: 30px;
+            animation: subtlePulse 3s infinite ease-in-out;
+        }
+
+        #deactivated-overlay h1 {
+            font-size: 2.2em;
+            color: #ccc; /* Cinza claro */
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        #deactivated-overlay p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            max-width: 500px; /* Limita largura do texto */
+            margin-bottom: 25px;
+        }
+
+        #deactivated-overlay .footer-note {
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 30px;
+            font-style: italic;
+        }
+
+        @keyframes subtlePulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.03);
+                opacity: 1;
+            }
+        }
+
+        /* Esconde o conteúdo original quando o overlay está ativo */
+        body.deactivated .original-content {
+             display: none;
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Para Você, Meu Amor</h1>
-        <!-- Parágrafo Inicial REVERTIDO para o original -->
-        <p class="intro-paragraph">
-            Meu amor, fiz essa pequena surpresa para te mostrar o quanto te amo.
+    <!-- ========================================== -->
+    <!--      DIV PARA A TELA DE DESATIVAÇÃO       -->
+    <!-- ========================================== -->
+    <div id="deactivated-overlay">
+         <!-- Texto Opção 1 Integrado -->
+        <div class="broken-heart-icon">
+            <i class="fas fa-heart-broken"></i>
+        </div>
+        <h1>Página Indisponível</h1>
+        <p>
+            Para os amigos que chegaram até aqui, lamento informar que esta página foi desativada por tempo indeterminado.
         </p>
-
-        <!-- Fotos originais -->
-        <div class="photo-grid">
-            <img src="https://i.ibb.co/fDCKmtd/Imagem-do-Whats-App-de-2025-01-04-s-18-41-57-1191356c.jpg" alt="Foto 1" id="special-photo">
-            <img src="https://i.ibb.co/F7gMZNG/Imagem-do-Whats-App-de-2025-01-03-s-03-56-08-fcc618bd.jpg" alt="Foto 2">
-            <img src="https://i.ibb.co/L1ghMcN/Imagem-do-Whats-App-de-2025-01-03-s-03-49-16-9bea3550.jpg" alt="Foto 3">
-        </div>
-
-        <!-- Player Spotify REINSERIDO e visível -->
-        <div class="music-player">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/3iuC8v3WfFpMqQRg1NHDZM?si=6a0193ff9e484645&utm_source=copy-link" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-
-        <!-- Botão e carta originais -->
-        <button class="reveal-button" onclick="showLetter()">Revelar meu segredo ♥</button>
-        <div id="letter" class="letter-content">
-            <p>Meu amor, cada momento ao seu lado é um presente. Você me faz sentir a pessoa mais feliz do mundo. Te amo mais que tudo!</p>
-            <p>Com amor,</p>
-            <p>Seu amado</p>
-        </div>
+        <p>
+            O que ela representava... bem, as coisas mudaram. Meu coração está pesado demais agora, e sinceramente, não sei bem o que dizer ou como continuar com isso.
+        </p>
+        <p class="footer-note">
+            Agradeço a visita e a compreensão neste momento difícil.
+        </p>
     </div>
 
-    <!-- Player YouTube escondido (para música de fundo da mensagem especial) -->
-    <div class="hidden-player">
-        <iframe id="hidden-audio-player" width="1" height="1" src="https://www.youtube.com/embed/XgO9WyDA6sk?enablejsapi=1&loop=1&playlist=XgO9WyDA6sk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    </div>
+    <!-- ========================================== -->
+    <!--      SEU CONTEÚDO ORIGINAL COMEÇA AQUI     -->
+    <!--      (Será mostrado apenas se paginaAtiva = true) -->
+    <!-- ========================================== -->
+    <div class="original-content">
+        <div class="container">
+            <h1>Para Você, Meu Amor</h1>
+            <p class="intro-paragraph">
+                Meu amor, fiz essa pequena surpresa para te mostrar o quanto te amo.
+            </p>
 
-    <!-- Popup de senha com olho e botão alterado -->
-    <div id="password-popup" class="password-popup">
-        <div class="password-box">
-            <div class="lock-icon"><i class="fas fa-lock"></i></div>
-            <div class="password-title">Digite a Senha do meu Coração</div>
-            <div class="password-hint">Dica: Dia mais especial pra mim (formato: DDMMAA)</div>
-            <div class="password-input-container">
-                <input type="password" id="password-input" class="password-input" placeholder="******">
-                <i class="fas fa-eye" id="togglePassword"></i>
+            <div class="photo-grid">
+                <img src="https://i.ibb.co/fDCKmtd/Imagem-do-Whats-App-de-2025-01-04-s-18-41-57-1191356c.jpg" alt="Foto 1" id="special-photo">
+                <img src="https://i.ibb.co/F7gMZNG/Imagem-do-Whats-App-de-2025-01-03-s-03-56-08-fcc618bd.jpg" alt="Foto 2">
+                <img src="https://i.ibb.co/L1ghMcN/Imagem-do-Whats-App-de-2025-01-03-s-03-49-16-9bea3550.jpg" alt="Foto 3">
             </div>
-            <div id="error-message" class="error-message">Senha incorreta! Tente novamente.</div>
-            <button class="password-button" onclick="checkPassword()">Revelar meu amor</button>
+
+            <div class="music-player">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/3iuC8v3WfFpMqQRg1NHDZM?si=6a0193ff9e484645&utm_source=copy-link" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+
+            <button class="reveal-button">Revelar meu segredo ♥</button> <!-- Removido onclick direto para atribuir no JS -->
+            <div id="letter" class="letter-content">
+                <p>Meu amor, cada momento ao seu lado é um presente. Você me faz sentir a pessoa mais feliz do mundo. Te amo mais que tudo!</p>
+                <p>Com amor,</p>
+                <p>Seu amado</p>
+            </div>
         </div>
-    </div>
 
-    <!-- Mensagem especial (créditos) com o texto romântico/arrependido mantido -->
-    <div id="special-message" class="special-message">
-        <span class="close-btn" onclick="closeSpecialMessage()">×</span>
-        <div class="credits-container" id="credits-container">
-             <!-- Texto Romântico/Arrependido da versão anterior MANTIDO AQUI -->
-             <div class="romantic-text" style="animation-delay: 1s;">Meu amor... antes de tudo, me perdoa.</div>
-             <div class="romantic-text" style="animation-delay: 5s;">Se cheguei a te mostrar isso, é porque brigamos e nossa relação está muito fraca, sei que passamos por uma tempestade forte, e meu coração dói por qualquer palavra ou ação minha que tenha te machucado. O peso disso é imenso, ainda moro com minha mãe e continua aquela tempestade aqui em casa mas essa mensagem é atemporal feita para ser lida no momento certo.</div>
-             <div class="big-heart" style="animation: heartbeat 1.5s infinite, textAppear 1.5s 9s ease-out forwards; opacity:0;">❤️</div>
-             <div class="romantic-text" style="animation-delay: 13s;">Mas mesmo em meio a esse caos, quero que lembre disto: no dia <strong>31/10/2024</strong>, meu mundo encontrou seu norte... encontrou você.</div>
-             <div class="romantic-text" style="animation-delay: 18s;">Em cada detalhe seu, no seu sorriso, no seu olhar, encontrei a paz e a alegria que nem sabia que buscava tão desesperadamente.</div>
-             <div class="romantic-text" style="animation-delay: 23s;">Jossicleia, você é a luz teimosa que atravessa meus dias mais escuros, a canção que acalma minha alma inquieta.</div>
-             <div class="romantic-text" style="animation-delay: 28s;">Mesmo quando falhamos, quando erramos um com o outro, você ainda é a melhor parte de mim, a pessoa que me inspira a ser melhor.</div>
-             <div class="couple-names" style="animation-delay: 33s;">Daniel & Jossicleia</div>
-             <div class="infinity-symbol" style="animation-delay: 37s;">∞</div>
-             <div class="romantic-text" style="animation-delay: 41s;">Prometo não só lutar por nós, mas aprender, ouvir mais, e reconstruir nossa ponte com mais cuidado e amor, porque o que temos vale qualquer esforço, qualquer orgulho engolido.</div>
-             <div class="romantic-text" style="animation-delay: 47s;">Você é minha paixão, minha parceira... minha alma gêmea.</div>
-             <div class="romantic-text" style="animation-delay: 52s;">Este infinito é pequeno perto do amor que sinto, um amor que quero que seja para sempre, sem condições.</div>
-             <div class="romantic-text" style="animation-delay: 57s;">Não importa o que o futuro nos reserve, meu coração já fez a escolha dele, e ele sempre será seu.</div>
-             <div class="romantic-text" style="animation-delay: 62s;">Com todo meu amor e arrependimento, hoje e sempre...</div>
-             <div class="big-heart" style="animation: heartbeat 1.5s infinite, textAppear 1.5s 66s ease-out forwards; opacity:0;">❤️</div>
+        <!-- Player YouTube escondido -->
+        <div class="hidden-player">
+            <iframe id="hidden-audio-player" width="1" height="1" src="https://www.youtube.com/embed/XgO9WyDA6sk?enablejsapi=1&loop=1&playlist=XgO9WyDA6sk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
-    </div>
 
-    <!-- Explosão final Original -->
-    <div id="final-explosion" class="final-explosion">
-        <div class="love-equation">J + D = AMOR</div>
-    </div>
+        <!-- Popup de senha -->
+        <div id="password-popup" class="password-popup">
+            <div class="password-box">
+                <div class="lock-icon"><i class="fas fa-lock"></i></div>
+                <div class="password-title">Digite a Senha do meu Coração</div>
+                <div class="password-hint">Dica: Dia mais especial pra mim (formato: DDMMAA)</div>
+                <div class="password-input-container">
+                    <input type="password" id="password-input" class="password-input" placeholder="******">
+                    <i class="fas fa-eye" id="togglePassword"></i>
+                </div>
+                <div id="error-message" class="error-message">Senha incorreta! Tente novamente.</div>
+                <button class="password-button">Revelar meu amor</button> <!-- Removido onclick direto -->
+            </div>
+        </div>
 
-    <!-- Contador de Cliques Original -->
-    <div id="click-counter" class="click-counter">Faltam <span id="clicks-remaining">10</span> cliques</div>
+        <!-- Mensagem especial (créditos) -->
+        <div id="special-message" class="special-message">
+            <span class="close-btn">×</span> <!-- Removido onclick direto -->
+            <div class="credits-container" id="credits-container">
+                 <div class="romantic-text" style="animation-delay: 1s;">Meu amor... antes de tudo, me perdoa.</div>
+                 <div class="romantic-text" style="animation-delay: 5s;">Se cheguei a te mostrar isso, é porque brigamos e nossa relação está muito fraca, sei que passamos por uma tempestade forte, e meu coração dói por qualquer palavra ou ação minha que tenha te machucado. O peso disso é imenso, ainda moro com minha mãe e continua aquela tempestade aqui em casa mas essa mensagem é atemporal feita para ser lida no momento certo.</div>
+                 <div class="big-heart" style="animation: heartbeat 1.5s infinite, textAppear 1.5s 9s ease-out forwards; opacity:0;">❤️</div>
+                 <div class="romantic-text" style="animation-delay: 13s;">Mas mesmo em meio a esse caos, quero que lembre disto: no dia <strong>31/10/2024</strong>, meu mundo encontrou seu norte... encontrou você.</div>
+                 <div class="romantic-text" style="animation-delay: 18s;">Em cada detalhe seu, no seu sorriso, no seu olhar, encontrei a paz e a alegria que nem sabia que buscava tão desesperadamente.</div>
+                 <div class="romantic-text" style="animation-delay: 23s;">Jossicleia, você é a luz teimosa que atravessa meus dias mais escuros, a canção que acalma minha alma inquieta.</div>
+                 <div class="romantic-text" style="animation-delay: 28s;">Mesmo quando falhamos, quando erramos um com o outro, você ainda é a melhor parte de mim, a pessoa que me inspira a ser melhor.</div>
+                 <div class="couple-names" style="animation-delay: 33s;">Daniel & Jossicleia</div>
+                 <div class="infinity-symbol" style="animation-delay: 37s;">∞</div>
+                 <div class="romantic-text" style="animation-delay: 41s;">Prometo não só lutar por nós, mas aprender, ouvir mais, e reconstruir nossa ponte com mais cuidado e amor, porque o que temos vale qualquer esforço, qualquer orgulho engolido.</div>
+                 <div class="romantic-text" style="animation-delay: 47s;">Você é minha paixão, minha parceira... minha alma gêmea.</div>
+                 <div class="romantic-text" style="animation-delay: 52s;">Este infinito é pequeno perto do amor que sinto, um amor que quero que seja para sempre, sem condições.</div>
+                 <div class="romantic-text" style="animation-delay: 57s;">Não importa o que o futuro nos reserve, meu coração já fez a escolha dele, e ele sempre será seu.</div>
+                 <div class="romantic-text" style="animation-delay: 62s;">Com todo meu amor e arrependimento, hoje e sempre...</div>
+                 <div class="big-heart" style="animation: heartbeat 1.5s infinite, textAppear 1.5s 66s ease-out forwards; opacity:0;">❤️</div>
+            </div>
+        </div>
+
+        <!-- Explosão final -->
+        <div id="final-explosion" class="final-explosion">
+            <div class="love-equation">J + D = AMOR</div>
+        </div>
+
+        <!-- Contador de Cliques -->
+        <div id="click-counter" class="click-counter">Faltam <span id="clicks-remaining">10</span> cliques</div>
+
+    </div> <!-- Fim da div .original-content -->
+
 
     <script>
-        // === JAVASCRIPT COM TODAS AS FUNCIONALIDADES E CORREÇÕES ===
-        let clickCount = 0;
-        const clicksNeeded = 31;
-        const clicksToShowCounter = 10;
+        // ==========================================
+        //      CONTROLE DE ATIVAÇÃO DA PÁGINA
+        // ==========================================
+        const paginaAtiva = false; // <-- MUDE AQUI: true para ATIVAR, false para DESATIVAR
+        // ==========================================
 
-        const specialPhoto = document.getElementById('special-photo');
-        const specialMessage = document.getElementById('special-message');
-        const clickCounter = document.getElementById('click-counter');
-        const clicksRemainingSpan = document.getElementById('clicks-remaining');
-        const passwordPopup = document.getElementById('password-popup');
-        const passwordInput = document.getElementById('password-input');
-        const togglePassword = document.getElementById('togglePassword');
-        const errorMessage = document.getElementById('error-message');
-        const creditsContainer = document.getElementById('credits-container');
-        const finalExplosion = document.getElementById('final-explosion');
-        const closeBtn = document.querySelector('.close-btn');
-        const hiddenAudioPlayerElement = document.getElementById('hidden-audio-player');
+        const overlay = document.getElementById('deactivated-overlay');
+        const bodyElement = document.body;
+        const titleElement = document.querySelector('title');
+        const originalContent = document.querySelector('.original-content');
 
-        let ytPlayer;
+        if (!paginaAtiva) {
+            // Página DESATIVADA
+            titleElement.textContent = "Indisponível - Coração Partido";
+            if (overlay) overlay.classList.add('show'); // Mostra o overlay triste
+            bodyElement.classList.add('deactivated'); // Adiciona classe para esconder conteúdo original via CSS
+            bodyElement.style.overflow = 'hidden'; // Garante que não haja scroll
 
-        // === Inicialização da API do YouTube ===
-        function loadYouTubeAPI() { /* ... código mantido ... */
-             const tag = document.createElement('script');
-             tag.src = "https://www.youtube.com/iframe_api";
-             const firstScriptTag = document.getElementsByTagName('script')[0];
-             if (firstScriptTag) { firstScriptTag.parentNode.insertBefore(tag, firstScriptTag); }
-             else { document.head.appendChild(tag); }
-        }
-        window.onYouTubeIframeAPIReady = function() { /* ... código mantido ... */
-             console.log("YouTube API Ready.");
-             try {
-                 ytPlayer = new YT.Player('hidden-audio-player', {
-                     height: '1', width: '1', videoId: 'XgO9WyDA6sk',
-                     playerVars: { 'playsinline': 1, 'loop': 1, 'playlist': 'XgO9WyDA6sk' },
-                     events: { 'onReady': onPlayerReady, 'onError': onPlayerError }
-                 });
-             } catch(e) { console.error("Erro ao inicializar YT Player:", e); }
-        }
-        function onPlayerReady(event) { console.log("YouTube Player está pronto."); }
-        function onPlayerError(event) { console.error("Erro no YouTube Player:", event.data); }
-        loadYouTubeAPI();
+        } else {
+            // Página ATIVADA
+            titleElement.textContent = "Para Você, Meu Amor"; // Título original
+            if (overlay) overlay.style.display = 'none'; // Garante que o overlay não apareça
+            bodyElement.classList.add('active'); // Aplica o estilo de fundo original
+            bodyElement.style.overflowY = 'auto'; // Permite scroll vertical
+            bodyElement.style.overflowX = 'hidden'; // Mantém scroll horizontal escondido
+            if (originalContent) originalContent.style.display = 'block'; // Garante que o conteúdo original seja visível
 
-        // === Lógica de Cliques e Senha ===
-        specialPhoto.addEventListener('click', function() { /* ... código mantido ... */
-            if (clickCount < clicksNeeded) {
-                clickCount++;
-                const remaining = clicksNeeded - clickCount;
-                if (remaining <= clicksToShowCounter && remaining > 0) {
-                    clickCounter.style.display = 'block';
-                    clicksRemainingSpan.textContent = remaining;
-                    if (remaining <= 5) { clickCounter.style.animation = 'bounce 0.5s infinite'; clickCounter.style.backgroundColor = 'rgba(255, 77, 77, 0.7)'; }
-                    else { clickCounter.style.animation = 'bounce 2s infinite'; clickCounter.style.backgroundColor = 'rgba(255,255,255,0.3)'; }
-                } else {
-                    clickCounter.style.display = 'none';
-                }
-                if (clickCount === clicksNeeded) {
-                    if(clickCounter) clickCounter.style.display = 'none';
-                    showPasswordPopup();
-                }
+            // --- TODO O SEU JAVASCRIPT ORIGINAL VEM AQUI DENTRO ---
+            let clickCount = 0;
+            const clicksNeeded = 31;
+            const clicksToShowCounter = 10;
+
+            // Selecionar elementos APENAS se a página estiver ativa
+            const specialPhoto = document.getElementById('special-photo');
+            const specialMessage = document.getElementById('special-message');
+            const clickCounter = document.getElementById('click-counter');
+            const clicksRemainingSpan = document.getElementById('clicks-remaining');
+            const passwordPopup = document.getElementById('password-popup');
+            const passwordInput = document.getElementById('password-input');
+            const togglePassword = document.getElementById('togglePassword');
+            const errorMessage = document.getElementById('error-message');
+            const creditsContainer = document.getElementById('credits-container');
+            const finalExplosion = document.getElementById('final-explosion');
+            const closeBtn = document.querySelector('.close-btn');
+            const hiddenAudioPlayerElement = document.getElementById('hidden-audio-player');
+            const revealBtn = document.querySelector('.reveal-button');
+            const passwordBtn = document.querySelector('.password-button');
+
+            let ytPlayer;
+
+            // === Inicialização da API do YouTube ===
+            function loadYouTubeAPI() {
+                 const tag = document.createElement('script');
+                 tag.src = "https://www.youtube.com/iframe_api";
+                 const firstScriptTag = document.getElementsByTagName('script')[0];
+                 if (firstScriptTag) { firstScriptTag.parentNode.insertBefore(tag, firstScriptTag); }
+                 else { document.head.appendChild(tag); }
             }
-        });
-        togglePassword.addEventListener('click', function () { /* ... código mantido ... */
-             const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-             passwordInput.setAttribute('type', type);
-             this.classList.toggle('fa-eye'); this.classList.toggle('fa-eye-slash');
-        });
-        passwordInput.addEventListener('keypress', function(e) { if (e.key === 'Enter') { checkPassword(); } });
-        function showPasswordPopup() { /* ... código mantido ... */
-             passwordInput.value = ''; errorMessage.style.display = 'none'; passwordInput.classList.remove('shake-effect');
-             passwordInput.setAttribute('type', 'password'); togglePassword.classList.remove('fa-eye-slash'); togglePassword.classList.add('fa-eye');
-             passwordPopup.style.display = 'flex'; document.body.style.overflow = 'hidden'; passwordInput.focus();
-        }
-        function hidePasswordPopup() { passwordPopup.style.display = 'none'; }
-        function checkPassword() { /* ... código mantido ... */
-             if (passwordInput.value === '311024') { hidePasswordPopup(); showSpecialMessage(); }
-             else {
-                 errorMessage.style.display = 'block'; passwordInput.classList.add('shake-effect');
-                 setTimeout(() => { passwordInput.classList.remove('shake-effect'); }, 500);
-                 passwordInput.focus(); passwordInput.select();
+            window.onYouTubeIframeAPIReady = function() {
+                 console.log("YouTube API Ready.");
+                 try {
+                     ytPlayer = new YT.Player('hidden-audio-player', {
+                         height: '1', width: '1', videoId: 'XgO9WyDA6sk',
+                         playerVars: { 'playsinline': 1, 'loop': 1, 'playlist': 'XgO9WyDA6sk' },
+                         events: { 'onReady': onPlayerReady, 'onError': onPlayerError }
+                     });
+                 } catch(e) { console.error("Erro ao inicializar YT Player:", e); }
+            }
+            function onPlayerReady(event) { console.log("YouTube Player está pronto."); }
+            function onPlayerError(event) { console.error("Erro no YouTube Player:", event.data); }
+            loadYouTubeAPI(); // Chama a função para carregar a API
+
+            // === Lógica de Cliques e Senha ===
+            if (specialPhoto) { // Verifica se o elemento existe antes de adicionar listener
+                specialPhoto.addEventListener('click', function() {
+                    if (clickCount < clicksNeeded) {
+                        clickCount++;
+                        const remaining = clicksNeeded - clickCount;
+                        if (remaining <= clicksToShowCounter && remaining > 0 && clickCounter) {
+                            clickCounter.style.display = 'block';
+                            if (clicksRemainingSpan) clicksRemainingSpan.textContent = remaining;
+                            if (remaining <= 5) { clickCounter.style.animation = 'bounce 0.5s infinite'; clickCounter.style.backgroundColor = 'rgba(255, 77, 77, 0.7)'; }
+                            else { clickCounter.style.animation = 'bounce 2s infinite'; clickCounter.style.backgroundColor = 'rgba(255,255,255,0.3)'; }
+                        } else if (clickCounter) {
+                            clickCounter.style.display = 'none';
+                        }
+                        if (clickCount === clicksNeeded) {
+                            if(clickCounter) clickCounter.style.display = 'none';
+                            showPasswordPopup();
+                        }
+                    }
+                });
+            }
+             if(togglePassword && passwordInput) { // Verifica ambos os elementos
+                togglePassword.addEventListener('click', function () {
+                     const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                     passwordInput.setAttribute('type', type);
+                     this.classList.toggle('fa-eye'); this.classList.toggle('fa-eye-slash');
+                });
+            }
+             if (passwordInput) {
+                passwordInput.addEventListener('keypress', function(e) { if (e.key === 'Enter') { checkPassword(); } });
+            }
+             if (passwordBtn) { // Atribui a função checkPassword ao clique do botão
+                 passwordBtn.onclick = checkPassword;
              }
+
+            function showPasswordPopup() {
+                 if (!passwordPopup || !passwordInput || !errorMessage || !togglePassword) return; // Verifica se elementos existem
+                 passwordInput.value = ''; errorMessage.style.display = 'none'; passwordInput.classList.remove('shake-effect');
+                 passwordInput.setAttribute('type', 'password'); togglePassword.classList.remove('fa-eye-slash'); togglePassword.classList.add('fa-eye');
+                 passwordPopup.style.display = 'flex'; document.body.style.overflow = 'hidden'; passwordInput.focus();
+            }
+            function hidePasswordPopup() { if(passwordPopup) passwordPopup.style.display = 'none'; }
+            function checkPassword() {
+                 if (!passwordInput || !errorMessage) return; // Verifica elementos
+                 if (passwordInput.value === '311024') { hidePasswordPopup(); showSpecialMessage(); }
+                 else {
+                     errorMessage.style.display = 'block'; passwordInput.classList.add('shake-effect');
+                     setTimeout(() => { passwordInput.classList.remove('shake-effect'); }, 500);
+                     passwordInput.focus(); passwordInput.select();
+                 }
+            }
+
+            // === Funções da Mensagem Especial e Música ===
+            function showSpecialMessage() {
+                 if (!specialMessage || !closeBtn || !creditsContainer) return; // Verifica elementos
+                 specialMessage.style.display = 'flex'; closeBtn.style.display = 'block';
+                 if (ytPlayer && typeof ytPlayer.playVideo === 'function') { ytPlayer.playVideo(); }
+                 else { console.warn("Player YT não pronto para playVideo."); }
+                 creditsContainer.style.animation = 'none'; void creditsContainer.offsetWidth; creditsContainer.style.animation = `scrollCredits 120s linear forwards`;
+                 setTimeout(showFinalExplosion, 115000); // Chama explosão após animação
+            }
+             if (closeBtn) {
+                 closeBtn.onclick = closeSpecialMessage; // Atribui a função ao evento onclick
+             }
+            function closeSpecialMessage() {
+                 if (!specialMessage || !finalExplosion || !closeBtn || !creditsContainer) return; // Verifica elementos
+                 specialMessage.style.display = 'none'; finalExplosion.style.display = 'none'; closeBtn.style.display = 'none'; document.body.style.overflow = 'auto';
+                 if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') { ytPlayer.pauseVideo(); }
+                 else { console.warn("Player YT não pronto para pauseVideo."); }
+                 creditsContainer.style.animationPlayState = 'paused';
+            }
+            function showFinalExplosion() {
+                 if (!finalExplosion) return; // Verifica elemento
+                 finalExplosion.style.display = 'flex'; finalExplosion.innerHTML = '<div class="love-equation">J + D = AMOR</div>'; // Recria conteúdo caso fechado antes
+                 for (let i = 0; i < 50; i++) { createExplosionHeart(); }
+            }
+            function createExplosionHeart() {
+                 if (!finalExplosion) return; // Verifica elemento pai
+                 const heart = document.createElement('div'); heart.className = 'explosion-heart'; heart.innerHTML = '❤️';
+                 heart.style.left = `calc(50% + ${Math.random() * 40 - 20}px)`; heart.style.top = `calc(50% + ${Math.random() * 40 - 20}px)`; heart.style.animationDelay = `${Math.random() * 0.5}s`;
+                 finalExplosion.appendChild(heart); setTimeout(() => { heart.remove(); }, 2500);
+            }
+
+            // === Funções Auxiliares (Originais) ===
+             if (revealBtn) { // Atribui a função showLetter ao clique do botão
+                 revealBtn.onclick = showLetter;
+             }
+            function showLetter() {
+                 const letter = document.getElementById('letter');
+                 if (!letter) return; // Verifica elemento
+                 const isDisplayed = letter.style.display === 'block'; letter.style.display = isDisplayed ? 'none' : 'block';
+                 if (!isDisplayed) { for (let i = 0; i < 10; i++) { createPetal(); } }
+            }
+
+            let petalInterval = null; // Inicializa intervalo como nulo
+            function createPetal() {
+                 const petal = document.createElement('div'); petal.className = 'petal'; petal.style.left = `${Math.random() * 100}vw`; petal.style.animationDelay = `${Math.random() * 4}s`; petal.style.transform = `scale(${Math.random() * 0.5 + 0.7})`;
+                 document.body.appendChild(petal); setTimeout(() => { petal.remove(); }, 9000);
+            }
+
+            // Inicia o intervalo de pétalas APENAS se a página estiver ativa
+            petalInterval = setInterval(createPetal, 500);
+            window.addEventListener('load', () => { for(let i = 0; i < 15; i++){ createPetal(); } console.log("Página ATIVA carregada, pétalas iniciais criadas."); });
+
+            // Garantir que popups comecem escondidos no modo ativo
+            document.addEventListener('DOMContentLoaded', (event) => {
+                if (passwordPopup) passwordPopup.style.display = 'none';
+                if (specialMessage) specialMessage.style.display = 'none';
+                if (clickCounter) clickCounter.style.display = 'none';
+                 console.log("DOM carregado no modo ATIVO, garantindo que popups estão escondidos.");
+            });
+             // --- FIM DO SEU JAVASCRIPT ORIGINAL ---
         }
 
-        // === Funções da Mensagem Especial e Música ===
-        function showSpecialMessage() { /* ... código mantido ... */
-             specialMessage.style.display = 'flex'; closeBtn.style.display = 'block';
-             if (ytPlayer && typeof ytPlayer.playVideo === 'function') { ytPlayer.playVideo(); }
-             else { console.warn("Player YT não pronto para playVideo."); }
-             creditsContainer.style.animation = 'none'; void creditsContainer.offsetWidth; creditsContainer.style.animation = `scrollCredits 120s linear forwards`;
-             setTimeout(showFinalExplosion, 115000);
-        }
-        function closeSpecialMessage() { /* ... código mantido ... */
-             specialMessage.style.display = 'none'; finalExplosion.style.display = 'none'; closeBtn.style.display = 'none'; document.body.style.overflow = 'auto';
-             if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') { ytPlayer.pauseVideo(); }
-             else { console.warn("Player YT não pronto para pauseVideo."); }
-             creditsContainer.style.animationPlayState = 'paused';
-        }
-        function showFinalExplosion() { /* ... código mantido ... */
-             finalExplosion.style.display = 'flex'; finalExplosion.innerHTML = '<div class="love-equation">J + D = AMOR</div>';
-             for (let i = 0; i < 50; i++) { createExplosionHeart(); }
-        }
-        function createExplosionHeart() { /* ... código mantido ... */
-             const heart = document.createElement('div'); heart.className = 'explosion-heart'; heart.innerHTML = '❤️';
-             heart.style.left = `calc(50% + ${Math.random() * 40 - 20}px)`; heart.style.top = `calc(50% + ${Math.random() * 40 - 20}px)`; heart.style.animationDelay = `${Math.random() * 0.5}s`;
-             finalExplosion.appendChild(heart); setTimeout(() => { heart.remove(); }, 2500);
-        }
-
-        // === Funções Auxiliares (Originais) ===
-        function showLetter() { /* ... código mantido ... */
-             const letter = document.getElementById('letter'); const isDisplayed = letter.style.display === 'block'; letter.style.display = isDisplayed ? 'none' : 'block';
-             if (!isDisplayed) { for (let i = 0; i < 10; i++) { createPetal(); } }
-        }
-        function createPetal() { /* ... código mantido ... */
-             const petal = document.createElement('div'); petal.className = 'petal'; petal.style.left = `${Math.random() * 100}vw`; petal.style.animationDelay = `${Math.random() * 4}s`; petal.style.transform = `scale(${Math.random() * 0.5 + 0.7})`;
-             document.body.appendChild(petal); setTimeout(() => { petal.remove(); }, 9000);
-        }
-        const petalInterval = setInterval(createPetal, 500);
-        window.addEventListener('load', () => { for(let i = 0; i < 15; i++){ createPetal(); } console.log("Página carregada, pétalas iniciais criadas."); });
-
-        // Garantir que popups comecem escondidos
-        document.addEventListener('DOMContentLoaded', (event) => { /* ... código mantido ... */
-            if (passwordPopup) passwordPopup.style.display = 'none';
-            if (specialMessage) specialMessage.style.display = 'none';
-            if (clickCounter) clickCounter.style.display = 'none';
-             console.log("DOM carregado, garantindo que popups estão escondidos.");
-        });
     </script>
+
 </body>
 </html>
